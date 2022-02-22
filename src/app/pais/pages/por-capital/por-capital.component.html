@@ -1,0 +1,33 @@
+<h2>Por Capital</h2>
+<hr>
+<div class="row">
+    <div class="col">
+        <app-pais-input 
+        (onEnter)="buscarPorCapital( $event )" 
+        (onDeBounce)="sugerencias( $event )"
+        [printPlaceHolder]="placeHolder"
+        ></app-pais-input>
+    </div>
+</div>
+<ul class="list-group">
+    <li *ngFor="let pais of sugerenciasPorCapitalResp"
+    class="list-group-item list-group-item-action">
+        <a [routerLink]="[ '/pais', pais.cca2]">{{ pais.capital }} :: {{ pais.name.common}}</a>
+    </li>
+    <li *ngIf="termino.length > 0"
+    class="list-group-item list-group-item-action red"
+    (click)="buscarPorCapital( termino )" >
+       Buscar todo lo que coincida con: {{ termino }} | ({{ nresultados }} fila(s))
+    </li>
+</ul>
+<hr>
+
+<div *ngIf="errorPorCapital" class="alert alert-danger">
+    No hay coincidencias con {{ termino }}
+</div>
+
+<div *ngIf="!errorPorCapital" class="row">
+    <div class="col">
+        <app-pais-tabla [paisesLista]="paisesPorCapitalResp"></app-pais-tabla>
+    </div>
+</div>

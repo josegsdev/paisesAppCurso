@@ -1,0 +1,29 @@
+<h2>Buscar por region</h2>
+<hr>
+<!--
+[class.btn-primary]="region === regionActiva"
+                [ngClass]="{
+                    'btn-primary':region === regionActiva,
+                    'btn-outline-primary':region != regionActiva
+                }"e2a317so
+-->
+<div class="row">
+    <div class="col">
+        <button *ngFor="let region of regiones"
+                [class]="cambiarClase(region)"
+                (click)="activarRegion(region)">
+            {{ region | titlecase }}
+        </button>
+    </div>
+</div>
+<hr>
+
+<div *ngIf="err" class="alert alert-danger">
+    No hay coincidencias con {{ regionActiva }}
+</div>
+
+<div *ngIf="!err" class="row">
+    <div class="col">
+        <app-pais-tabla [paisesLista]="muestraResultados"></app-pais-tabla>
+    </div>
+</div>

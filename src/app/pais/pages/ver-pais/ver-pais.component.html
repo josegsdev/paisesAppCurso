@@ -1,0 +1,17 @@
+<div *ngIf="pais.length < 1; else muestraPais" class="alert alert-info">
+    espere por favor...
+</div>
+
+<ng-template #muestraPais>
+
+<div *ngFor="let p of pais">
+    <h2>{{ p.name.official }}</h2>
+    <div style="font-size: 50px;">{{p.flag}}</div>
+    <ul class="list-group">
+        <li class="list-group-item">Poblacion: {{ p.population | number}}</li>
+        <li class="list-group-item">Capital: {{ p.capital }}</li>
+        <li class="list-group-item">Region: {{ p.region }}</li>
+        <li class="list-group-item">Codigo postal: {{ p.postalCode?.format }}</li>
+    </ul>
+</div>
+</ng-template>

@@ -1,0 +1,40 @@
+<h2>Por Pais</h2>
+<hr>
+<div class="row">
+    <div class="col">
+        <app-pais-input 
+        (onEnter)="buscar( $event )" 
+        (onDeBounce)="sugerencias( $event )"
+        [printPlaceHolder]="placeHolder"></app-pais-input>
+    </div>
+</div>
+<!--<ul class="list-group">
+    <li *ngFor="let pais of paisesSug"
+    class="list-group-item list-group-item-action"
+    (click)="buscar( pais.name.common )" >
+        {{ pais.name.common }}
+    </li>
+</ul>-->
+<ul class="list-group">
+    <li *ngFor="let pais of paisesSug"
+    class="list-group-item list-group-item-action">
+        <a [routerLink]="[ '/pais', pais.cca2]">{{ pais.name.common }}</a>
+    </li>
+    <li *ngIf="termino.length > 0"
+    class="list-group-item list-group-item-action red"
+    (click)="buscar( termino )" >
+       Buscar todo lo que coincida con: {{ termino }} | ({{ nresultados }} filas)
+    </li>
+</ul>
+
+<hr>
+
+<div *ngIf="_error" class="alert alert-danger">
+    No hay coincidencias con {{ termino }}
+</div>
+
+<div *ngIf="!_error" class="row">
+    <div class="col">
+        <app-pais-tabla [paisesLista]="paisesResp"></app-pais-tabla>
+    </div>
+</div>
